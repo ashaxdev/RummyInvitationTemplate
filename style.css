@@ -1,0 +1,230 @@
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+
+body{
+font-family:monospace;
+color:white;
+text-align:center;
+
+background-image:url("casinoi.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
+min-height:100vh;
+object-fit: cover;
+}
+/* TABLE */
+
+.table{
+position:relative;
+width:100%;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:20px;
+/* background:radial-gradient(circle,#065f46,#022d21); */
+}
+
+/* TITLE */
+
+.title{
+position:absolute;
+top:5vh;
+
+font-size:clamp(24px,4vw,48px);
+
+color:#ffd700;
+text-shadow:0 0 20px gold;
+}
+
+/* CENTER */
+
+.center-area{
+width:100%;
+max-width:1000px;
+
+height:clamp(300px,50vh,450px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+/* PARTICLES */
+
+#particles{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+/* SCENE */
+
+.card-scene{
+width:100%;
+height:100%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+perspective:1400px;
+}
+
+/* CIRCLE */
+
+.card-circle{
+position:relative;
+
+width:clamp(260px,60vw,500px);
+height:clamp(260px,60vw,500px);
+
+transform-style:preserve-3d;
+}
+
+/* CARD */
+
+
+
+.card{
+position:absolute;
+
+width:clamp(110px,14vw,170px);
+height:clamp(160px,20vw,240px);
+
+left:50%;
+top:50%;
+
+margin-left:calc(-1 * clamp(55px,7vw,85px));
+margin-top:calc(-1 * clamp(80px,10vw,120px));
+
+transform-style:preserve-3d;
+
+transition:transform 0.8s cubic-bezier(.25,.8,.25,1);
+
+z-index:1;
+}
+
+/* ACTIVE CARD */
+
+.card.active{
+transform:translateZ(320px) scale(1.6) !important;
+z-index:1000;
+}
+
+/* OTHER CARDS PUSH BACK */
+
+.card.dim{
+transform:translateZ(60px) scale(0.85);
+z-index:0;
+}
+
+/* INNER */
+
+.card-inner{
+width:100%;
+height:100%;
+
+position:relative;
+
+transform-style:preserve-3d;
+transition:transform 0.8s ease;
+}
+
+/* FACES */
+
+.card-front,
+.card-back{
+position:absolute;
+
+width:100%;
+height:100%;
+
+border-radius:12px;
+
+backface-visibility:hidden;
+
+box-shadow:0 20px 40px rgba(0,0,0,.6);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:clamp(18px,2vw,34px);
+font-weight:bold;
+}
+
+/* FRONT */
+
+.card-front img{
+width:100%;
+height:100%;
+border-radius:12px;
+object-fit:cover;
+}
+
+.card-back{
+background:white;
+color:#333;
+
+transform:rotateY(180deg);
+
+position:relative;
+overflow:hidden;
+}
+
+
+/* FLIP */
+
+.card.flip .card-inner{
+transform:rotateY(180deg);
+}
+
+.card:hover{
+filter:drop-shadow(0 0 15px gold);
+cursor:pointer;
+}
+
+/* MOBILE */
+
+
+@media (max-width:480px){
+
+.card-circle{
+width:280px;
+height:280px;
+}
+
+/* .card.active{
+transform:translateZ(180px) scale(1.3) !important;
+} */
+
+.title{
+font-size:22px;
+}
+
+}
+.detail-img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:12px;
+}
+/* CARD BACK */
+
+/* .card-back{
+background:white;
+color:#333;
+transform:rotateY(180deg);
+position:relative;
+overflow:hidden;
+} */
