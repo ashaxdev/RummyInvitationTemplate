@@ -1,3 +1,5 @@
+/* PARTICLE BACKGROUND */
+
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
@@ -7,9 +9,7 @@ canvas.height = window.innerHeight;
 }
 
 resizeCanvas();
-window.addEventListener("resize",resizeCanvas);
-
-/* PARTICLES */
+window.addEventListener("resize", resizeCanvas);
 
 let particles=[];
 
@@ -48,7 +48,9 @@ requestAnimationFrame(animate);
 
 animate();
 
-/* CAROUSEL */
+
+
+/* CARD CAROUSEL */
 
 const cards = document.querySelectorAll(".card");
 
@@ -57,6 +59,11 @@ const radius = 260;
 
 let rotation = 0;
 let activeIndex = -1;
+
+let carouselInterval;
+
+
+/* POSITION CARDS */
 
 function positionCards(){
 
@@ -73,27 +80,21 @@ card.style.transform =
 
 positionCards();
 
-/* CARD LOOP */
+
+
+/* SHOW NEXT CARD */
 
 function showNextCard(){
-
-/* reset cards */
 
 cards.forEach(card=>{
 card.classList.remove("active","flip","dim");
 });
 
-/* next card */
-
 activeIndex = (activeIndex + 1) % total;
-
-/* rotate carousel */
 
 rotation -= 360/total;
 
 positionCards();
-
-/* push other cards back */
 
 cards.forEach((card,i)=>{
 if(i !== activeIndex){
@@ -101,13 +102,9 @@ card.classList.add("dim");
 }
 });
 
-/* zoom active card */
-
 setTimeout(()=>{
 
 cards[activeIndex].classList.add("active");
-
-/* flip card */
 
 setTimeout(()=>{
 cards[activeIndex].classList.add("flip");
@@ -115,20 +112,90 @@ cards[activeIndex].classList.add("flip");
 
 },800);
 
-/* next card after 7s */
+}
 
-setTimeout(showNextCard,5000);
+
+
+/* START CAROUSEL */
+
+function startCarousel(){
+
+carouselInterval = setInterval(showNextCard,5000);
 
 }
-setTimeout(showNextCard,2000);
+
+setTimeout(()=>{
+showNextCard();
+startCarousel();
+},2000);
+
+
+
+/* MUSIC CONTROL */
 
 const music = document.getElementById("bgMusic");
 const hint = document.getElementById("tapHint");
 
-document.addEventListener("click", function(){
+document.addEventListener("click",function(){
 
 music.play();
+hint.style.display="none";
 
-hint.style.display = "none";
+},{once:true});
 
-}, { once:true });
+
+
+/* PAUSE WHILE TOUCHING CARD */
+
+cards.forEach((card,i)=>{
+
+/* MOBILE TOUCH */
+
+card.addEventListener("touchstart",function(){
+
+if(i === activeIndex){
+
+clearInterval(carouselInterval);
+music.pause();
+
+}
+
+});
+
+card.addEventListener("touchend",function(){
+
+if(i === activeIndex){
+
+startCarousel();
+music.play();
+
+}
+
+});
+
+
+/* DESKTOP MOUSE */
+
+card.addEventListener("mousedown",function(){
+
+if(i === activeIndex){
+
+clearInterval(carouselInterval);
+music.pause();
+
+}
+
+});
+
+card.addEventListener("mouseup",function(){
+
+if(i === activeIndex){
+
+startCarousel();
+music.play();
+
+}
+
+});
+
+});
