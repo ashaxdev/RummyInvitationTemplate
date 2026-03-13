@@ -10,13 +10,13 @@ font-family:monospace;
 color:white;
 text-align:center;
 
-background-image:url("casinoi.jpg");
+background-image:url("download.jpg");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
 background-attachment:fixed;
 min-height:100vh;
-object-fit: cover;
+
 }
 /* TABLE */
 
@@ -198,6 +198,9 @@ cursor:pointer;
 
 
 @media (max-width:480px){
+body{
+    background-attachment: scroll;
+}
 
 .card-circle{
 width:280px;
@@ -212,6 +215,11 @@ transform:translateZ(180px) scale(1.3) !important;
 font-size:22px;
 }
 
+}
+@media (max-width:768px){
+  body{
+    background-attachment: scroll;
+  }
 }
 .detail-img{
 width:100%;
@@ -228,3 +236,39 @@ transform:rotateY(180deg);
 position:relative;
 overflow:hidden;
 } */
+#tapHint{
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+
+background:rgba(0,0,0,0.6);
+color:#fff;
+
+padding:12px 22px;
+border-radius:30px;
+
+font-size:16px;
+letter-spacing:1px;
+
+backdrop-filter:blur(10px);
+
+animation:pulse 1.5s infinite;
+z-index:9999;
+}
+
+@keyframes pulse{
+
+0%{
+transform:translateX(-50%) scale(1);
+}
+
+50%{
+transform:translateX(-50%) scale(1.08);
+}
+
+100%{
+transform:translateX(-50%) scale(1);
+}
+
+}

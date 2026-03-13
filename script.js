@@ -123,13 +123,12 @@ setTimeout(showNextCard,5000);
 setTimeout(showNextCard,2000);
 
 const music = document.getElementById("bgMusic");
+const hint = document.getElementById("tapHint");
 
-function startMusic() {
-    music.play().catch(function(e){
-        console.log("Autoplay blocked until interaction");
-    });
+document.addEventListener("click", function(){
 
-    document.removeEventListener("click", startMusic);
-}
+music.play();
 
-document.addEventListener("click", startMusic);
+hint.style.display = "none";
+
+}, { once:true });
